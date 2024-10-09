@@ -3,7 +3,9 @@ let userseq=[];
 let btns=["yellow","red","green","purple"];
 let start=false;
 let level=0;
+let score =0;
 let h2=document.querySelector("h2");
+let scoreDisplay = document.getElementById('score');
 
 document.addEventListener("keypress",function(){
    if(start==false){
@@ -24,6 +26,8 @@ function levelUp(){
     userseq=[];
     level++;
     h2.innerText=`Level ${level}`;
+    score = level- 1;
+    scoreDisplay.textContent = score;
 
     let randIdx=Math.floor(Math.random()*3);
     let randColor=btns[randIdx];
@@ -44,6 +48,7 @@ function userFlash(btn){
     }
   }
   else{
+    sounds.gameOver.play();
     h2.innerHTML=`Game Over! <b>Your score was ${level}.<b> <br>Press any key to Restart`;
     document.querySelector("body").style.backgroundColor="red";
     setTimeout(function(){
@@ -68,5 +73,20 @@ function reset(){
     start=false;
     gameseq=[];
     userseq=[];
-    level=0;
+    level = 0;
+    score = 0;
+    scoreDisplay.textContent = score;
 }
+const sounds = {
+    red: new Audio('mixkit-on-or-off-light-switch-tap-2585.wav'),
+    yellow: new Audio('mixkit-hard-typewriter-click-1119.wav'),
+    green: new Audio('mixkit-game-click-1114.wav'),
+    purple: new Audio('mixkit-interface-device-click-2577.wav'),
+    gameOver: new Audio('mixkit-player-losing-or-failing-2042.wav')
+};
+
+document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('click', () => {
+        sounds[button.id].play();
+    });
+});
