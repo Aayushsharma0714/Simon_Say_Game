@@ -11,6 +11,7 @@ document.addEventListener("keypress",function(){
    if(start==false){
     console.log("game started");
     start=true;
+    document.querySelector("body").style.backgroundImage = "url('bg.jpg')"; 
     levelUp();
     }
 });
@@ -50,6 +51,7 @@ function userFlash(btn){
   else{
     sounds.gameOver.play();
     h2.innerHTML=`Game Over! <b>Your score was ${level}.<b> <br>Press any key to Restart`;
+    document.querySelector("body").style.backgroundImage = "none"; 
     document.querySelector("body").style.backgroundColor="red";
     setTimeout(function(){
         document.querySelector("body").style.backgroundColor="white";
@@ -76,6 +78,7 @@ function reset(){
     level = 0;
     score = 0;
     scoreDisplay.textContent = score;
+   
 }
 const sounds = {
     red: new Audio('mixkit-on-or-off-light-switch-tap-2585.wav'),
